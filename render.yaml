@@ -1,7 +1,7 @@
 services:
   - type: web
     name: churn-prediction-api
-    runtime: python
+    env: python
     rootDir: backend
     buildCommand: pip install -r requirements.txt
     startCommand: python main.py
