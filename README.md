@@ -12,7 +12,7 @@
 
 |          | Link                                                                                                                           |
 | -------- | ------------------------------------------------------------------------------------------------------------------------------ |
-| Frontend | [your-app.vercel.app](https://your-app.vercel.app)                                                                             |
+| Frontend | [customer-churn-revenue-intelligence.vercel.app](https://customer-churn-revenue-intelligence.vercel.app)                       |
 | Source   | [github.com/sumeet7878/customer-churn-revenue-intelligence](https://github.com/sumeet7878/customer-churn-revenue-intelligence) |
 
 ![Dashboard Preview](screenshot.png)
