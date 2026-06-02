@@ -13,7 +13,7 @@
 |          | Link                                                                                                                           |
 | -------- | ------------------------------------------------------------------------------------------------------------------------------ |
 | Frontend | [your-app.vercel.app](https://your-app.vercel.app)                                                                             |
-| API      | [your-api.onrender.com](https://your-api.onrender.com)                                                                         |
+| API      | [customer-churn-revenue-intelligence-1.onrender.com](https://customer-churn-revenue-intelligence-1.onrender.com)               |
 | Source   | [github.com/sumeet7878/customer-churn-revenue-intelligence](https://github.com/sumeet7878/customer-churn-revenue-intelligence) |
 
 > **Note:** Backend runs on Render's free tier — first request after inactivity may take ~40 seconds to wake up. Subsequent requests are fast.
