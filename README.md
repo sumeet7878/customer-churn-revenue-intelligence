@@ -20,6 +20,7 @@
 
 ![Dashboard Preview](screenshot.png)
 
+
 ---
 
 ## Problem Statement
@@ -76,69 +77,67 @@ Winner is selected automatically at training time and logged to console on start
 
 ---
 
-## Setup (GitHub Codespaces)
+## Setup
 
-### 1. Backend
+### 1. Generate prediction data (run once)
 
 ```bash
-cd backend
-pip install -r requirements.txt
-cp .env.example .env        # defaults are fine for local dev
-python main.py              # downloads dataset + trains model on first run (~60 s)
+# From repo root — installs backend deps if needed
+pip install -r backend/requirements.txt
+python generate_predictions.py
 ```
 
-`backend/.env`:
+This trains the model (if `backend/model.pkl` is absent), scores all 7 000+ customers, and writes `frontend/src/data/results.json`. Re-run whenever you want fresh predictions.
 
-```
-PORT=8000
-ALLOWED_ORIGINS=http://localhost:5173
-```
-
-### 2. Frontend
+### 2. Run the frontend locally
 
 ```bash
 cd frontend
 npm install
-cp .env.example .env
-npm run dev
+npm run dev        # opens http://localhost:5173
 ```
 
-`frontend/.env`:
-
-```
-VITE_API_URL=http://localhost:8000
-# Codespaces: VITE_API_URL=https://CODESPACE-NAME-8000.app.github.dev
-```
-
-Open port `5173` in your browser.
+No backend server needed — the frontend reads `results.json` at build time.
 
 ---
 
-## Deploy
+## Deploy to Vercel (frontend-only, free)
 
-### Backend → Render
+1. Push repo to GitHub.
+2. [vercel.com](https://vercel.com) → **New Project** → import repo.
+3. Leave **Root Directory** as `/` (root-level `vercel.json` handles everything).
+4. No environment variables needed.
+5. Click **Deploy**.
 
-`render.yaml` at the repo root is pre-configured. In Render: **New → Blueprint** → connect repo → set `ALLOWED_ORIGINS` to your Vercel frontend URL.
+`vercel.json` at the repo root builds `frontend/` and serves `frontend/dist/`.
 
-### Frontend → Vercel
-
-Import the repo in Vercel, set root to `frontend/`, and add:
-
-```
-VITE_API_URL=https://your-api.onrender.com
-```
-
-`vercel.json` handles SPA routing automatically.
+> **No backend required in production.** All prediction data is pre-computed and bundled with the frontend at build time.
 
 ---
 
-## API Reference
+## Refreshing predictions
 
-| Method | Endpoint          | Description                                                      |
-| ------ | ----------------- | ---------------------------------------------------------------- |
-| GET    | `/health`         | Liveness check — reports model name + customer count             |
-| GET    | `/predictions`    | All customers with churn probability, risk tier, monthly charges |
-| GET    | `/revenue-impact` | KPIs: churners, at-risk revenue, top-20% savings, tier breakdown |
+```bash
+# Retrain + regenerate (if you want updated data)
+python generate_predictions.py
+git add frontend/src/data/results.json
+git commit -m "chore: refresh prediction data"
+git push
+```
+
+Vercel auto-deploys on push.
+
+---
+
+## Backend (reference only)
+
+The `backend/` folder contains the original FastAPI server and is kept for reference. It is **not** used in the Vercel deployment.
+
+| File | Purpose |
+|---|---|
+| `backend/train.py` | ML pipeline — LR vs RF, picks best by ROC-AUC |
+| `backend/main.py` | FastAPI endpoints (`/health`, `/predictions`, `/revenue-impact`) |
+| `generate_predictions.py` | One-time script that uses the backend ML code to produce `results.json` |
 
 All responses include `Cache-Control: no-store` headers.
 

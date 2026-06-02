@@ -1,19 +1,10 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import data from "./data/results.json";
 import ChurnBarChart from "./components/ChurnBarChart.jsx";
 import CustomerTable from "./components/CustomerTable.jsx";
 import InsightBanner from "./components/InsightBanner.jsx";
 import KPICard from "./components/KPICard.jsx";
 import { CURRENCIES, CURRENCY_KEYS, formatMoney } from "./utils/currency.js";
-
-const API = (import.meta.env.VITE_API_URL ?? "").replace(/\/$/, "");
-
-async function apiFetch(path) {
-  const res = await fetch(`${API}${path}?t=${Date.now()}`, {
-    headers: { "Cache-Control": "no-cache", Pragma: "no-cache" },
-  });
-  if (!res.ok) throw new Error(`${res.status} ${res.statusText} — ${path}`);
-  return res.json();
-}
 
 // ─── Currency selector ────────────────────────────────────────────────────────
 function CurrencySelector({ value, onChange }) {
@@ -71,77 +62,22 @@ function RevenueBreakdown({ breakdown, fmtMoney }) {
   );
 }
 
-// ─── Spinner ──────────────────────────────────────────────────────────────────
-function Spinner({ message }) {
-  return (
-    <div className="min-h-screen bg-gray-950 flex flex-col items-center justify-center gap-4">
-      <div className="w-14 h-14 rounded-full border-4 border-indigo-700 border-t-indigo-400 animate-spin" />
-      <p className="text-gray-400 text-base">{message}</p>
-    </div>
-  );
-}
-
 // ─── App ──────────────────────────────────────────────────────────────────────
 export default function App() {
-  const [revenue, setRevenue] = useState(null);
-  const [predictions, setPredictions] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
   const [currency, setCurrency] = useState("INR");
 
-  useEffect(() => {
-    (async () => {
-      try {
-        const [rev, pred] = await Promise.all([
-          apiFetch("/revenue-impact"),
-          apiFetch("/predictions"),
-        ]);
-        setRevenue(rev);
-        setPredictions(pred);
-      } catch (e) {
-        setError(e.message);
-      } finally {
-        setLoading(false);
-      }
-    })();
-  }, []);
+  const { stats, insight, customers } = data;
 
-  if (loading) return <Spinner message="Loading churn predictions…" />;
-
-  if (error) {
-    return (
-      <div className="min-h-screen bg-gray-950 flex flex-col items-center justify-center gap-3 px-4">
-        <p className="text-red-400 text-xl font-semibold">Failed to load data</p>
-        <p className="text-gray-400 text-sm text-center max-w-md">{error}</p>
-        <p className="text-gray-500 text-xs mt-2">
-          Make sure the backend is running and{" "}
-          <code className="text-indigo-300">VITE_API_URL</code> is set correctly.
-        </p>
-        <button
-          onClick={() => window.location.reload()}
-          className="mt-4 px-5 py-2 bg-indigo-600 hover:bg-indigo-500 text-white rounded-lg text-sm transition-colors"
-        >
-          Retry
-        </button>
-      </div>
-    );
-  }
-
-  const savings = revenue?.total_annual_savings ?? 0;
-  const tierCounts = revenue?.tier_counts ?? {};
-  const topCustomers = (predictions?.customers ?? [])
-    .sort((a, b) => b.churn_probability - a.churn_probability)
-    .slice(0, 20);
-
-  // Converts from INR base using the selected currency
   const fmtMoney = (amountINR, decimals = 0) =>
     formatMoney(Number(amountINR ?? 0), currency, decimals);
+
+  const topCustomers = customers.slice(0, 20);
 
   return (
     <div className="min-h-screen bg-gray-950 text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
 
-        {/* Header — title left, currency selector right */}
+        {/* Header */}
         <header className="flex items-start justify-between gap-4 mb-7">
           <div>
             <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-white">
@@ -156,10 +92,11 @@ export default function App() {
           </div>
         </header>
 
-        {/* Insight banner */}
+        {/* Insight banners */}
         <InsightBanner
-          savings={savings}
-          topCount={revenue?.top_20_pct_count}
+          savings={stats.total_annual_savings}
+          topCount={stats.top_20_pct_count}
+          insight={insight}
           fmtMoney={fmtMoney}
         />
 
@@ -167,25 +104,25 @@ export default function App() {
         <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
           <KPICard
             title="Total Customers"
-            value={(revenue?.total_customers ?? 0).toLocaleString()}
+            value={stats.total_customers.toLocaleString()}
             icon="👥"
             color="indigo"
           />
           <KPICard
             title="Predicted Churners"
-            value={(revenue?.predicted_churners ?? 0).toLocaleString()}
+            value={stats.predicted_churners.toLocaleString()}
             icon="⚠️"
             color="yellow"
           />
           <KPICard
             title="At-Risk Revenue (Annual)"
-            value={fmtMoney(revenue?.at_risk_revenue)}
+            value={fmtMoney(stats.at_risk_revenue)}
             icon="💸"
             color="red"
           />
           <KPICard
             title="Potential Savings"
-            value={fmtMoney(savings)}
+            value={fmtMoney(stats.total_annual_savings)}
             icon="💰"
             color="green"
           />
@@ -197,7 +134,7 @@ export default function App() {
             <h2 className="text-base font-semibold text-gray-100 mb-4">
               Customers by Risk Tier
             </h2>
-            <ChurnBarChart tierCounts={tierCounts} />
+            <ChurnBarChart tierCounts={stats.tier_counts} />
           </div>
 
           <div className="bg-gray-900 rounded-xl p-5 sm:p-6">
@@ -207,7 +144,7 @@ export default function App() {
             <p className="text-gray-500 text-xs mt-0.5 mb-4">
               Annual value at stake per risk segment within the top 20% at-risk cohort
             </p>
-            <RevenueBreakdown breakdown={revenue?.breakdown} fmtMoney={fmtMoney} />
+            <RevenueBreakdown breakdown={stats.breakdown} fmtMoney={fmtMoney} />
           </div>
         </section>
 
@@ -224,7 +161,7 @@ export default function App() {
 
         {/* Footer */}
         <footer className="mt-8 text-center text-gray-600 text-xs">
-          Model: RandomForest / LogisticRegression (best by ROC-AUC) · Dataset: IBM Telco Customer Churn
+          Model: {data.model_name} (ROC-AUC {data.auc}) · Dataset: IBM Telco Customer Churn
         </footer>
       </div>
     </div>
