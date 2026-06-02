@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: churn-prediction-api
+    runtime: python
+    pythonVersion: "3.11.0"
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: python main.py
+    healthCheckPath: /health
+    autoDeploy: true
+    envVars:
+      - key: ALLOWED_ORIGINS
+        value: https://your-frontend.vercel.app
