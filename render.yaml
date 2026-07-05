@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: churn-prediction-api
+    env: python
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt && python -c "from train import train_and_save_model; from pathlib import Path; train_and_save_model(Path('model.pkl'))"
+    startCommand: python main.py
+    healthCheckPath: /health
+    autoDeploy: true
+    envVars:
+      - key: ALLOWED_ORIGINS
+        value: https://your-frontend.vercel.app  # update after Vercel deploy

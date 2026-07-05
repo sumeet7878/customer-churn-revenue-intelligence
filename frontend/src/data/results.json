@@ -1,0 +1,382 @@
+{
+  "generated_at": "2026-06-02T14:48:40",
+  "model_name": "LogisticRegression",
+  "auc": 0.8416,
+  "stats": {
+    "total_customers": 7043,
+    "predicted_churners": 1568,
+    "at_risk_revenue": 1519323.6,
+    "top_20_pct_count": 1408,
+    "total_annual_savings": 1374873.0,
+    "tier_counts": {
+      "Low": 4946,
+      "Medium": 1607,
+      "High": 490
+    },
+    "breakdown": [
+      {
+        "risk_tier": "High",
+        "count": 490,
+        "revenue": 503146.2
+      },
+      {
+        "risk_tier": "Medium",
+        "count": 918,
+        "revenue": 871726.8
+      }
+    ]
+  },
+  "insight": "Month-to-month customers churn at 42.7% vs 11.3% for annual contracts (3.8\u00d7 higher risk). Two-year contracts are the most loyal at 2.8% churn.",
+  "customers": [
+    {
+      "customerID": "9497-QCMMS",
+      "churn_probability": 0.8581,
+      "risk_tier": "High",
+      "MonthlyCharges": 93.55,
+      "annual_value": 1122.6
+    },
+    {
+      "customerID": "9300-AGZNL",
+      "churn_probability": 0.8565,
+      "risk_tier": "High",
+      "MonthlyCharges": 94.0,
+      "annual_value": 1128.0
+    },
+    {
+      "customerID": "5178-LMXOP",
+      "churn_probability": 0.855,
+      "risk_tier": "High",
+      "MonthlyCharges": 95.1,
+      "annual_value": 1141.2
+    },
+    {
+      "customerID": "4424-TKOPW",
+      "churn_probability": 0.8536,
+      "risk_tier": "High",
+      "MonthlyCharges": 93.85,
+      "annual_value": 1126.2
+    },
+    {
+      "customerID": "2720-WGKHP",
+      "churn_probability": 0.8527,
+      "risk_tier": "High",
+      "MonthlyCharges": 94.0,
+      "annual_value": 1128.0
+    },
+    {
+      "customerID": "7024-OHCCK",
+      "churn_probability": 0.8501,
+      "risk_tier": "High",
+      "MonthlyCharges": 93.85,
+      "annual_value": 1126.2
+    },
+    {
+      "customerID": "5567-WSELE",
+      "churn_probability": 0.8494,
+      "risk_tier": "High",
+      "MonthlyCharges": 94.6,
+      "annual_value": 1135.2
+    },
+    {
+      "customerID": "5150-ITWWB",
+      "churn_probability": 0.8473,
+      "risk_tier": "High",
+      "MonthlyCharges": 94.85,
+      "annual_value": 1138.2
+    },
+    {
+      "customerID": "7216-EWTRS",
+      "churn_probability": 0.8444,
+      "risk_tier": "High",
+      "MonthlyCharges": 100.8,
+      "annual_value": 1209.6
+    },
+    {
+      "customerID": "1374-DMZUI",
+      "churn_probability": 0.8426,
+      "risk_tier": "High",
+      "MonthlyCharges": 94.3,
+      "annual_value": 1131.6
+    },
+    {
+      "customerID": "8098-LLAZX",
+      "churn_probability": 0.8371,
+      "risk_tier": "High",
+      "MonthlyCharges": 95.45,
+      "annual_value": 1145.4
+    },
+    {
+      "customerID": "8149-RSOUN",
+      "churn_probability": 0.8355,
+      "risk_tier": "High",
+      "MonthlyCharges": 93.85,
+      "annual_value": 1126.2
+    },
+    {
+      "customerID": "4910-GMJOT",
+      "churn_probability": 0.8324,
+      "risk_tier": "High",
+      "MonthlyCharges": 94.6,
+      "annual_value": 1135.2
+    },
+    {
+      "customerID": "0295-PPHDO",
+      "churn_probability": 0.8319,
+      "risk_tier": "High",
+      "MonthlyCharges": 95.45,
+      "annual_value": 1145.4
+    },
+    {
+      "customerID": "6861-XWTWQ",
+      "churn_probability": 0.8301,
+      "risk_tier": "High",
+      "MonthlyCharges": 99.25,
+      "annual_value": 1191.0
+    },
+    {
+      "customerID": "7851-WZEKY",
+      "churn_probability": 0.8261,
+      "risk_tier": "High",
+      "MonthlyCharges": 95.15,
+      "annual_value": 1141.8
+    },
+    {
+      "customerID": "3049-SOLAY",
+      "churn_probability": 0.8248,
+      "risk_tier": "High",
+      "MonthlyCharges": 95.2,
+      "annual_value": 1142.4
+    },
+    {
+      "customerID": "5419-JPRRN",
+      "churn_probability": 0.8219,
+      "risk_tier": "High",
+      "MonthlyCharges": 101.45,
+      "annual_value": 1217.4
+    },
+    {
+      "customerID": "3158-MOERK",
+      "churn_probability": 0.8217,
+      "risk_tier": "High",
+      "MonthlyCharges": 96.0,
+      "annual_value": 1152.0
+    },
+    {
+      "customerID": "3068-OMWZA",
+      "churn_probability": 0.8215,
+      "risk_tier": "High",
+      "MonthlyCharges": 88.8,
+      "annual_value": 1065.6
+    },
+    {
+      "customerID": "4826-XTSOH",
+      "churn_probability": 0.8203,
+      "risk_tier": "High",
+      "MonthlyCharges": 86.05,
+      "annual_value": 1032.6
+    },
+    {
+      "customerID": "8884-ADFVN",
+      "churn_probability": 0.8193,
+      "risk_tier": "High",
+      "MonthlyCharges": 101.95,
+      "annual_value": 1223.4
+    },
+    {
+      "customerID": "2545-EBUPK",
+      "churn_probability": 0.819,
+      "risk_tier": "High",
+      "MonthlyCharges": 84.05,
+      "annual_value": 1008.6
+    },
+    {
+      "customerID": "4822-RVYBB",
+      "churn_probability": 0.8188,
+      "risk_tier": "High",
+      "MonthlyCharges": 100.6,
+      "annual_value": 1207.2
+    },
+    {
+      "customerID": "1069-XAIEM",
+      "churn_probability": 0.8185,
+      "risk_tier": "High",
+      "MonthlyCharges": 85.05,
+      "annual_value": 1020.6
+    },
+    {
+      "customerID": "6023-YEBUP",
+      "churn_probability": 0.8169,
+      "risk_tier": "High",
+      "MonthlyCharges": 100.95,
+      "annual_value": 1211.4
+    },
+    {
+      "customerID": "1400-MMYXY",
+      "churn_probability": 0.8154,
+      "risk_tier": "High",
+      "MonthlyCharges": 105.9,
+      "annual_value": 1270.8
+    },
+    {
+      "customerID": "5192-EBGOV",
+      "churn_probability": 0.8154,
+      "risk_tier": "High",
+      "MonthlyCharges": 85.7,
+      "annual_value": 1028.4
+    },
+    {
+      "customerID": "9057-SIHCH",
+      "churn_probability": 0.8154,
+      "risk_tier": "High",
+      "MonthlyCharges": 96.6,
+      "annual_value": 1159.2
+    },
+    {
+      "customerID": "6496-SLWHQ",
+      "churn_probability": 0.815,
+      "risk_tier": "High",
+      "MonthlyCharges": 105.0,
+      "annual_value": 1260.0
+    },
+    {
+      "customerID": "4695-WJZUE",
+      "churn_probability": 0.815,
+      "risk_tier": "High",
+      "MonthlyCharges": 88.55,
+      "annual_value": 1062.6
+    },
+    {
+      "customerID": "0781-LKXBR",
+      "churn_probability": 0.815,
+      "risk_tier": "High",
+      "MonthlyCharges": 100.5,
+      "annual_value": 1206.0
+    },
+    {
+      "customerID": "6630-UJZMY",
+      "churn_probability": 0.8148,
+      "risk_tier": "High",
+      "MonthlyCharges": 83.25,
+      "annual_value": 999.0
+    },
+    {
+      "customerID": "8161-QYMTT",
+      "churn_probability": 0.8138,
+      "risk_tier": "High",
+      "MonthlyCharges": 94.1,
+      "annual_value": 1129.2
+    },
+    {
+      "customerID": "2660-EMUBI",
+      "churn_probability": 0.8136,
+      "risk_tier": "High",
+      "MonthlyCharges": 95.35,
+      "annual_value": 1144.2
+    },
+    {
+      "customerID": "1415-YFWLT",
+      "churn_probability": 0.8129,
+      "risk_tier": "High",
+      "MonthlyCharges": 89.3,
+      "annual_value": 1071.6
+    },
+    {
+      "customerID": "4626-GYCZP",
+      "churn_probability": 0.8127,
+      "risk_tier": "High",
+      "MonthlyCharges": 93.85,
+      "annual_value": 1126.2
+    },
+    {
+      "customerID": "5277-ZLOOR",
+      "churn_probability": 0.812,
+      "risk_tier": "High",
+      "MonthlyCharges": 85.55,
+      "annual_value": 1026.6
+    },
+    {
+      "customerID": "2446-BEGGB",
+      "churn_probability": 0.812,
+      "risk_tier": "High",
+      "MonthlyCharges": 98.25,
+      "annual_value": 1179.0
+    },
+    {
+      "customerID": "2012-NWRPA",
+      "churn_probability": 0.8113,
+      "risk_tier": "High",
+      "MonthlyCharges": 99.55,
+      "annual_value": 1194.6
+    },
+    {
+      "customerID": "6521-YYTYI",
+      "churn_probability": 0.8079,
+      "risk_tier": "High",
+      "MonthlyCharges": 93.3,
+      "annual_value": 1119.6
+    },
+    {
+      "customerID": "4750-ZRXIU",
+      "churn_probability": 0.8071,
+      "risk_tier": "High",
+      "MonthlyCharges": 84.6,
+      "annual_value": 1015.2
+    },
+    {
+      "customerID": "9681-OXGVC",
+      "churn_probability": 0.8066,
+      "risk_tier": "High",
+      "MonthlyCharges": 100.5,
+      "annual_value": 1206.0
+    },
+    {
+      "customerID": "7450-NWRTR",
+      "churn_probability": 0.8065,
+      "risk_tier": "High",
+      "MonthlyCharges": 99.45,
+      "annual_value": 1193.4
+    },
+    {
+      "customerID": "9061-TIHDA",
+      "churn_probability": 0.8057,
+      "risk_tier": "High",
+      "MonthlyCharges": 95.25,
+      "annual_value": 1143.0
+    },
+    {
+      "customerID": "1273-MTETI",
+      "churn_probability": 0.8048,
+      "risk_tier": "High",
+      "MonthlyCharges": 88.85,
+      "annual_value": 1066.2
+    },
+    {
+      "customerID": "3988-RQIXO",
+      "churn_probability": 0.8035,
+      "risk_tier": "High",
+      "MonthlyCharges": 91.3,
+      "annual_value": 1095.6
+    },
+    {
+      "customerID": "2865-TCHJW",
+      "churn_probability": 0.8021,
+      "risk_tier": "High",
+      "MonthlyCharges": 89.2,
+      "annual_value": 1070.4
+    },
+    {
+      "customerID": "1455-UGQVH",
+      "churn_probability": 0.802,
+      "risk_tier": "High",
+      "MonthlyCharges": 98.5,
+      "annual_value": 1182.0
+    },
+    {
+      "customerID": "3793-MMFUH",
+      "churn_probability": 0.8017,
+      "risk_tier": "High",
+      "MonthlyCharges": 95.05,
+      "annual_value": 1140.6
+    }
+  ]
+}
